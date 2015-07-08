@@ -90,8 +90,8 @@ For more information check the "Entities" example within this package.
 
 ## Installation
 
-1. Make sure you are running PHP 5.4. It is required for using the necessary traits
-   to inject the necessary functionality into your controllers. 
+1. Make sure you are running PHP 5.4 or newer. It is required for using the necessary
+   traits to inject the necessary functionality into your controllers. 
 2. Make sure you have [Composer](https://getcomposer.org/) installed on your computer.
 3. Clone this repository into your concrete5 installations "packages" folder.
 4. Rename the folder to `symfony_forms_example`.
