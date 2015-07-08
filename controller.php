@@ -44,6 +44,10 @@ class Controller extends Package
 
     public function install()
     {
+        if (version_compare(phpversion(), '5.4', '<')) {
+            throw new \Exception(t("Minimum PHP version required by this package is 5.4. Please update your PHP."));
+        }
+
         $pkg = parent::install();
 
         $this->installSinglePages($pkg);
