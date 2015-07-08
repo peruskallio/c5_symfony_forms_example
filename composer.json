@@ -1,0 +1,15 @@
+{
+    "repositories": [
+        {
+            "type": "git",
+            "url": "http://git/c5lib_symfony_forms.git/"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "mainio/c5-symfony-forms": "dev-master"
+    }
+}

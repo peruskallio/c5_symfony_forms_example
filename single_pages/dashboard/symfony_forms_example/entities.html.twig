@@ -1,0 +1,38 @@
+{% if form %}
+
+    {% include '_form.html.twig' %}
+
+{% else %}
+
+    <div class="ccm-dashboard-header-buttons">
+        <a href="{{ action('add') }}" class="btn btn-primary">{{ "Add"|trans }}</a>
+    </div>
+
+    {% if cars|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ "Name"|trans }}</th>
+                    <th>{{ "Retail Price"|trans }}</th>
+                    <th>{{ "Type"|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for car in cars %}
+                <tr>
+                    <td>{{ car.get('name') }}</td>
+                    <td>{{ car.get('retailPrice') }}</td>
+                    <td>{{ car.getTypeName }}</td>
+                    <td>
+                        <a href="{{ action('edit', car.get('carID')) }}" class="btn btn-default pull-right">{{ "Edit"|trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ "You do not currently have any cars in the database."|trans }}</p>
+    {% endif %}
+
+{% endif %}
