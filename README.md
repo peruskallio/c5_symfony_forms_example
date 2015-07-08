@@ -53,7 +53,7 @@ $builder->getForm();
 
 ```
 
-Then, in your view, you print out the form like this:
+Then, in your view, you print out the form like this (using twig templates):
 
 ```twig
 
