@@ -14,6 +14,7 @@
     },
     "require": {
         "php": ">=5.3.3",
+        "mainio/c5-twig-templates": "dev-master",
         "mainio/c5-symfony-forms": "dev-master"
     }
 }
