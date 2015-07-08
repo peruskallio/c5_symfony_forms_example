@@ -1,6 +1,6 @@
 # Symfony forms example for concrete5
 
-This is an example on how to use Symfony forms within concrete5.
+This is an example on how to use [Symfony forms](https://symfony.com/doc/current/book/forms.html) within concrete5.
 
 This relies on the following composer package since this functionality is not
 currently built in to concrete5:
