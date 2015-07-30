@@ -42,6 +42,14 @@ class Controller extends Package
         return t("Example of using Symfony forms and validators within the concrete5 package context.");
     }
 
+    public function on_start()
+    {
+        PackageRouteProvider::registerRoutes();
+
+        // Register the twig services for the single pages
+        $this->registerTwigServices($this);
+    }
+
     public function install()
     {
         if (version_compare(phpversion(), '5.4', '<')) {
@@ -50,25 +58,36 @@ class Controller extends Package
 
         $pkg = parent::install();
 
+        $this->clearTwigCache($pkg);
+
         $this->installSinglePages($pkg);
     }
 
-    public function on_start()
+    public function upgrade()
     {
-        PackageRouteProvider::registerRoutes();
+        parent::upgrade();
 
-        // Register the twig services for the single pages
-        $app = Core::getFacadeApplication();
-        $spt = new TwigServiceProvider($app, $this);
-        $spt->register();
+        $this->clearTwigCache($this);
     }
 
-    protected function installSinglePages($pkg)
+    protected function installSinglePages(Package $pkg)
     {
         $sp = SinglePage::add('/dashboard/symfony_forms_example', $pkg);
         $sp = SinglePage::add('/dashboard/symfony_forms_example/types', $pkg);
         $sp = SinglePage::add('/dashboard/symfony_forms_example/entities', $pkg);
 		$sp = SinglePage::add('/dashboard/symfony_forms_example/plain', $pkg);
+    }
+
+    protected function clearTwigCache(Package $pkg)
+    {
+        $this->registerTwigServices($pkg);
+        Core::make('multiple_domains/twig')->clearCacheDirectory();
+    }
+
+    protected function registerTwigServices(Package $pkg)
+    {
+        $spt = new TwigServiceProvider(Core::getFacadeApplication(), $pkg);
+        $spt->register();
     }
 
 }

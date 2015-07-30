@@ -103,6 +103,11 @@ return array(
 );
 ```
 
+Please also note the clearTwigCache() in the controller and how to use it
+during the package's installation and upgrade phases. This is necessary to make
+the twig templates recompiled on the target machines where your package is
+running at.
+
 ## Installation
 
 1. Make sure you are running PHP 5.4 or newer. It is required for using the necessary
