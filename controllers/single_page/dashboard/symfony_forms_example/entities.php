@@ -7,24 +7,30 @@ use \Mainio\C5\Twig\Page\Controller\DashboardPageController;
 use Package;
 use View;
 use Request;
-use Session;
 use Concrete\Package\SymfonyFormsExample\Src\Entity\Car;
 
 class Entities extends DashboardPageController
 {
 
     use \Mainio\C5\SymfonyForms\Controller\Extension\SymfonyFormsExtension;
+    use \Mainio\C5\ControllerExtensions\Controller\Extension\DoctrineEntitiesExtension;
+    use \Mainio\C5\ControllerExtensions\Controller\Extension\FlashMessagesExtension;
 
     protected $form;
 
+    public function on_start()
+    {
+        parent::on_start();
+
+        $this->registerRepository('car', 'Concrete\Package\SymfonyFormsExample\Src\Entity\Car');
+    }
+
     public function view()
     {
-        $rep = $this->getCarRepository();
+        $rep = $this->getRepository('car');
         $this->set('cars', $rep->findAll());
 
-        if (count($msg = $this->getFlash('successMessage')) > 0) {
-            $this->set('success', implode(", ", $msg));
-        }
+        $this->assignFlash('successMessage', 'success');
     }
 
     public function add()
@@ -46,7 +52,7 @@ class Entities extends DashboardPageController
 
     public function edit($carID)
     {
-        $car = $this->getCarRepository()->find($carID);
+        $car = $this->getRepository('car')->find($carID);
         if (!is_object($car)) {
             $this->redirect('/dashboard/symfony_forms_example/entities');
         }
@@ -70,7 +76,7 @@ class Entities extends DashboardPageController
         if ($this->form->isValid()) {
             $car = $this->form->getData();
 
-            $em = $this->em();
+            $em = $this->getEntityManager();
             $em->persist($car);
             $em->flush();
 
@@ -85,7 +91,7 @@ class Entities extends DashboardPageController
 
     protected function buildForm($object, $options = array())
     {
-        $em = $this->em();
+        $em = $this->getEntityManager();
         $formFactory = $this->getFormFactory();
         $builder = $formFactory->createBuilder('form', $object, array_merge(array(
             'action' => $object->carID > 0 ?
@@ -120,28 +126,6 @@ class Entities extends DashboardPageController
         $builder->add($buttons);
 
         return $builder->getForm();
-    }
-
-    protected function setFlash($key, $value)
-    {
-        $flashbag = Session::getFlashBag();
-        return $flashbag->set($key, $value);
-    }
-
-    protected function getFlash($key)
-    {
-        $flashbag = Session::getFlashBag();
-        return $flashbag->get($key);
-    }
-
-    protected function getCarRepository()
-    {
-        return $this->em()->getRepository('Concrete\Package\SymfonyFormsExample\Src\Entity\Car');
-    }
-
-    protected function em()
-    {
-        return Package::getByID($this->c->getPackageID())->getEntityManager();
     }
 
 }

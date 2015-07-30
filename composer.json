@@ -1,20 +1,10 @@
 {
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/mainio/c5pkg_symfony_forms.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/mainio/c5pkg_twig_templates.git"
-        }
-    ],
     "config": {
         "optimize-autoloader": true
     },
     "require": {
-        "php": ">=5.3.3",
-        "mainio/c5-twig-templates": "dev-master",
-        "mainio/c5-symfony-forms": "dev-master"
+        "php": ">=5.4.0",
+        "mainio/c5-twig-templates": "*",
+        "mainio/c5-symfony-forms": "*"
     }
 }

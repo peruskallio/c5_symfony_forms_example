@@ -85,8 +85,23 @@ if ($form->isValid()) {
 
 ```
 
-
 For more information check the "Entities" example within this package.
+
+## Good to know
+
+When developing with the twig templates, by default it caches the templates to
+your cache directory. When you make any changes to the templates they are not
+automatically recompiled to the cache.
+
+To avoid this during the development phase, add this to your `application/config/app.php`:
+
+```php
+return array(
+    // ... some other configs ...
+    'twig_debug' => true
+    // ... some other configs ...
+);
+```
 
 ## Installation
 
