@@ -3,27 +3,11 @@ namespace Concrete\Package\SymfonyFormsExample;
 
 defined('C5_EXECUTE') or die("Access Denied.");
 
-// Autoload needs to happen already here as we need the included libraries
-// already in the package's extend statement. Too bad if we need different
-// versions of the same library in multiple packages, the one that is loaded
-// the first will always win. That's a widely acknowledged problem and there
-// are some possible ways to solve it:
-
-// Maybe some day built into composer:
-// https://github.com/composer/composer/issues/183
-
-// Drupal's way:
-// https://www.drupal.org/project/composer_manager
-// https://www.acquia.com/blog/using-composer-manager-get-island-now
-
-// Hopefully we'll have some way of handling this in concrete5 as well at some point...
-include(__DIR__ . '/vendor/autoload.php');
-
-use \Mainio\C5\Twig\TwigServiceProvider;
-use \Mainio\C5\Twig\Page\Single as SinglePage;
+use Concrete\Package\SymfonyFormsExample\Src\PackageRouteProvider;
 use Core;
+use Mainio\C5\Twig\TwigServiceProvider;
+use Mainio\C5\Twig\Page\Single as SinglePage;
 use Package;
-use \Concrete\Package\SymfonyFormsExample\Src\PackageRouteProvider;
 
 class Controller extends Package
 {
@@ -44,6 +28,8 @@ class Controller extends Package
 
     public function on_start()
     {
+        $this->loadDependencies();
+
         PackageRouteProvider::registerRoutes();
 
         // Register the twig services for the single pages
@@ -55,8 +41,14 @@ class Controller extends Package
         if (version_compare(phpversion(), '5.4', '<')) {
             throw new \Exception(t("Minimum PHP version required by this package is 5.4. Please update your PHP."));
         }
+        $fs = new \Illuminate\Filesystem\Filesystem();
+        if (!$fs->exists(dirname(__FILE__) . '/vendor/autoload.php')) {
+            throw new \Exception(t("Composer packages have not been installed for this add-on. Please follow the installation instructions!"));
+        }
 
         $pkg = parent::install();
+
+        $this->loadDependencies();
 
         $this->clearTwigCache($pkg);
 
@@ -88,6 +80,27 @@ class Controller extends Package
     {
         $spt = new TwigServiceProvider(Core::getFacadeApplication(), $pkg);
         $spt->register();
+    }
+
+    protected function loadDependencies()
+    {
+        // No other way of managing the composer dependencies currently.
+        // See: https://github.com/concrete5/concrete5-5.7.0/issues/360
+        $filesystem = new \Illuminate\Filesystem\Filesystem();
+        $loader = $filesystem->getRequire(dirname(__FILE__) . '/vendor/autoload.php');
+
+        $this->intlFix($loader);
+    }
+
+    protected function intlFix(\Composer\Autoload\ClassLoader $loader)
+    {
+        // When defining the load path for the 'Collator' class, it messes up
+        // punic as punic expects PHP's intl to be installed when this class
+        // exists in the global namespace. The symfony-intl's Collator only
+        // works with the 'en' locale which becomes a problem e.g. with the
+        // c5's default locale (en_US). The 'Collator' class isn't used
+        // anywhere in this add-on, so it is not needed.
+        $loader->addClassMap(array('Collator' => null));
     }
 
 }
