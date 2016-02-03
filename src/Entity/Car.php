@@ -50,7 +50,7 @@ class Car extends Entity
     protected $retailPrice;
 
     /**
-     * @OneToOne(targetEntity="Concrete\Core\File\File")
+     * @ManyToOne(targetEntity="Concrete\Core\File\File")
      * @JoinColumn(name="imageFID", referencedColumnName="fID")
      */
     protected $image;
