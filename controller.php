@@ -73,7 +73,7 @@ class Controller extends Package
     protected function clearTwigCache(Package $pkg)
     {
         $this->registerTwigServices($pkg);
-        Core::make('multiple_domains/twig')->clearCacheDirectory();
+        Core::make('symfony_forms_example/twig')->clearCacheDirectory();
     }
 
     protected function registerTwigServices(Package $pkg)
