@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ed142da623e9927386bed99bbc49836",
+    "hash": "c91919a7dc2ff7954fba0f6a08b44dbe",
     "content-hash": "1288de9b73cf7fe0c61dcba30db94037",
     "packages": [
         {
@@ -261,21 +261,21 @@
         },
         {
             "name": "mainio/c5-twig-templates",
-            "version": "v0.1.6",
+            "version": "v0.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mainio/c5pkg_twig_templates.git",
-                "reference": "ed3fe839e3ffb72a771429b1178ca3a5c061fb1a"
+                "reference": "c87525649442008e65b7770527e3ee76bb4a0d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mainio/c5pkg_twig_templates/zipball/ed3fe839e3ffb72a771429b1178ca3a5c061fb1a",
-                "reference": "ed3fe839e3ffb72a771429b1178ca3a5c061fb1a",
+                "url": "https://api.github.com/repos/mainio/c5pkg_twig_templates/zipball/c87525649442008e65b7770527e3ee76bb4a0d76",
+                "reference": "c87525649442008e65b7770527e3ee76bb4a0d76",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/twig-bridge": "3.*"
+                "symfony/twig-bridge": "2.5.*"
             },
             "type": "library",
             "extra": {
@@ -306,7 +306,7 @@
                 "templates",
                 "twig"
             ],
-            "time": "2016-06-28 13:30:43"
+            "time": "2016-06-28 14:12:12"
         },
         {
             "name": "psr/log",
@@ -1275,41 +1275,39 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v3.1.1",
+            "version": "v2.5.12",
+            "target-dir": "Symfony/Bridge/Twig",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "af3b13b5e0867d9abe9b5d3f226b46681fb807ad"
+                "reference": "e24ae84a82f150d6ccdcef12b8be632c9157c37c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/af3b13b5e0867d9abe9b5d3f226b46681fb807ad",
-                "reference": "af3b13b5e0867d9abe9b5d3f226b46681fb807ad",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/e24ae84a82f150d6ccdcef12b8be632c9157c37c",
+                "reference": "e24ae84a82f150d6ccdcef12b8be632c9157c37c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9",
-                "twig/twig": "~1.23|~2.0"
+                "php": ">=5.3.3",
+                "symfony/security-csrf": "~2.4",
+                "twig/twig": "~1.13,>=1.13.1"
             },
             "require-dev": {
-                "symfony/asset": "~2.8|~3.0",
-                "symfony/console": "~2.8|~3.0",
-                "symfony/expression-language": "~2.8|~3.0",
-                "symfony/finder": "~2.8|~3.0",
-                "symfony/form": "~3.0.4",
-                "symfony/http-kernel": "~2.8|~3.0",
-                "symfony/polyfill-intl-icu": "~1.0",
-                "symfony/routing": "~2.8|~3.0",
-                "symfony/security": "~2.8|~3.0",
-                "symfony/security-acl": "~2.8|~3.0",
-                "symfony/stopwatch": "~2.8|~3.0",
-                "symfony/templating": "~2.8|~3.0",
-                "symfony/translation": "~2.8|~3.0",
-                "symfony/var-dumper": "~2.8|~3.0",
-                "symfony/yaml": "~2.8|~3.0"
+                "symfony/console": "~2.4",
+                "symfony/expression-language": "~2.4",
+                "symfony/finder": "~2.3",
+                "symfony/form": "~2.5.2",
+                "symfony/http-kernel": "~2.3",
+                "symfony/intl": "~2.3",
+                "symfony/routing": "~2.2",
+                "symfony/security": "~2.4",
+                "symfony/stopwatch": "~2.2",
+                "symfony/templating": "~2.1",
+                "symfony/translation": "~2.2",
+                "symfony/yaml": "~2.0,>=2.0.5"
             },
             "suggest": {
-                "symfony/asset": "For using the AssetExtension",
                 "symfony/expression-language": "For using the ExpressionExtension",
                 "symfony/finder": "",
                 "symfony/form": "For using the FormExtension",
@@ -1319,22 +1317,18 @@
                 "symfony/stopwatch": "For using the StopwatchExtension",
                 "symfony/templating": "For using the TwigEngine",
                 "symfony/translation": "For using the TranslationExtension",
-                "symfony/var-dumper": "For using the DumpExtension",
                 "symfony/yaml": "For using the YamlExtension"
             },
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
+                "psr-0": {
                     "Symfony\\Bridge\\Twig\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1342,17 +1336,17 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
                 },
                 {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony Twig Bridge",
-            "homepage": "https://symfony.com",
-            "time": "2016-06-06 11:42:41"
+            "homepage": "http://symfony.com",
+            "time": "2015-02-08 07:07:45"
         },
         {
             "name": "symfony/validator",
